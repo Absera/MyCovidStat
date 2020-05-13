@@ -45,7 +45,7 @@ def get_world_stat(msg):
 
     for key in worldStatDict:
         worldStatFinal += f'{wordsDict[key]} : {worldStatDict[key]}\n'
-    worldStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: https://www.worldometers.info/'
+    worldStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: worldometers.info'
     return worldStatFinal
 
 
@@ -160,5 +160,5 @@ def get_top10_stat(msg):
         for keyj in countryStatDict[keyi]:
             countryStatFinal += f'\n{wordsDict[keyj]} : {countryStatDict[keyi][keyj]}'
         countryStatFinal += '\n\n+----------------------+\n'
-    countryStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: https://www.worldometers.info/'
+    countryStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: worldometers.info'
     return countryStatFinal

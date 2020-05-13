@@ -1,11 +1,3 @@
-def get_response(msg):
-    """
-    you can place your mastermind AI here
-    could be a very basic simple response like "معلش"
-    or a complex LSTM network that generate appropriate answer
-    """
-    return "Running"
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -166,6 +158,6 @@ def get_top10_stat(msg):
         countryStatFinal += f'\n       {str(keyi)}'
         for keyj in countryStatDict[keyi]:
             countryStatFinal += f'\n{wordsDict[keyj]} : {countryStatDict[keyi][keyj]}'
-        countryStatFinal += '\n\n+----------------+\n'
+        countryStatFinal += '\n\n+----------------------+\n'
 
     return countryStatFinal

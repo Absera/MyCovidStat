@@ -35,10 +35,10 @@ developed by @AbseraTemesgen
 
         '''
         bot.sendMessage(chat_id=chat_id, text=welcome)
-    elif text == 'world':
+    elif text == 'world' or text == 'World' :
         response = get_world_stat(text)
         bot.sendMessage(chat_id=chat_id, text=response)
-    elif text == 'top10':
+    elif text == 'top10' or text == 'Top10':
         response = get_top10_stat(text)
         bot.sendMessage(chat_id=chat_id, text=response)
 

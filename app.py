@@ -243,7 +243,7 @@
 from flask import Flask, request
 import telegram
 from telebot.credentials import bot_token, bot_user_name,URL
-from telebot.mastermind import get_response
+from telebot.mastermind import get_world_stat, get_top10_stat
 
 
 global bot
@@ -267,7 +267,10 @@ def respond():
     if text == 'world':
         response = get_world_stat(text)
         bot.sendMessage(chat_id=chat_id, text='response', reply_to_message_id=msg_id)
-
+    elif text == 'top10':
+        response = get_top10_stat(text)
+        bot.sendMessage(chat_id=chat_id, text='response', reply_to_message_id=msg_id)
+        
     return 'ok'
 
 @app.route('/setwebhook', methods=['GET', 'POST'])

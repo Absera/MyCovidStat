@@ -183,7 +183,7 @@ def get_top10_stat():
 ######################################################
 
 
-@app.route('/{}'.format(TOKEN), methods=['POST', 'GET'])
+@app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
 
 	update = telegram.Update.de_json(request.get_json(force=True), bot)

@@ -32,7 +32,7 @@ send 'top10' for top 10 infected countries
 developed by @AbseraTemesgen 
 
         '''
-        bot.sendMessage(chat_id=chat_id, text=response)
+        bot.sendMessage(chat_id=chat_id, text=welcome)
     elif text == 'world':
         response = get_world_stat(text)
         bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)

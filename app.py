@@ -266,11 +266,11 @@ def respond():
     print("got text message :", text)
     if text == 'world':
         response = get_world_stat(text)
-        bot.sendMessage(chat_id=chat_id, text='response', reply_to_message_id=msg_id)
+        bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
     elif text == 'top10':
         response = get_top10_stat(text)
-        bot.sendMessage(chat_id=chat_id, text='response', reply_to_message_id=msg_id)
-        
+        bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
+
     return 'ok'
 
 @app.route('/setwebhook', methods=['GET', 'POST'])

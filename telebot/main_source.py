@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 ######################################################
 # 					Stat Functions					 #
@@ -44,7 +45,7 @@ def get_world_stat(msg):
 
     for key in worldStatDict:
         worldStatFinal += f'{wordsDict[key]} : {worldStatDict[key]}\n'
-    
+    worldStatFinal += f'\n\nDate: {datetime.datetime.now()}'
     return worldStatFinal
 
 
@@ -72,7 +73,7 @@ def get_top10_stat(msg):
                     countryStat[itemIndex] = '-'
             
     wordsDict = {
-        'country_name' : 'Country Name',
+        'country_name' : 'Name',
         'total_cases' : 'Total Cases',
         'new_cases' : 'New Cases',
         'total_death' : 'Total Deaths',
@@ -159,5 +160,5 @@ def get_top10_stat(msg):
         for keyj in countryStatDict[keyi]:
             countryStatFinal += f'\n{wordsDict[keyj]} : {countryStatDict[keyi][keyj]}'
         countryStatFinal += '\n\n+----------------------+\n'
-
+    countryStatFinal += f'\n\nDate: {datetime.datetime.now()}'
     return countryStatFinal

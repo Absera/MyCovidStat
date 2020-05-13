@@ -26,19 +26,21 @@ W E L C O M E !
 Are you looking for Covid19 statistics?
 If your answer is yes, You are in the right place!
 
-send 'world' for world statistics
+send 'world' for global statistics
 send 'top10' for top 10 infected countries
 
+
+share the bot @myCovidStatbot
 developed by @AbseraTemesgen 
 
         '''
         bot.sendMessage(chat_id=chat_id, text=welcome)
     elif text == 'world':
         response = get_world_stat(text)
-        bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
+        bot.sendMessage(chat_id=chat_id, text=response)
     elif text == 'top10':
         response = get_top10_stat(text)
-        bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
+        bot.sendMessage(chat_id=chat_id, text=response)
 
     return 'ok'
 

@@ -51,19 +51,6 @@ def set_webhook():
         return "webhook setup ok"
     else:
         return "webhook setup failed"
-####
-
-@bot.message_handler(commands=['menu'])
-def menu(m):
-
-  cid = m.chat.id
-
-  menuKeyboard = types.InlineKeyboardMarkup()
-  menuKeyboard.add(types.InlineKeyboardButton('Button1', callback_data='button1'),
-           types.InlineKeyboardButton('Button2', callback_data='button2'))
-
-  bot.send_message(cid, "Menu", reply_markup=menuKeyboard)
-####
 
 @app.route('/')
 def index():

@@ -19,23 +19,23 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode('utf-8').decode()
-    
+
     if text == '/start':
         welcome = '''
+W E L C O M E !
+/world - for global statistics
+/top10 - for top 10 infected countries
+/about - info about the bot
 
-Welcome to this bot! 
-If you are looking for Covid19 statistics?
-
-You are in the right place!
-
-
-/world for global statistics
-/top10 for top 10 infected countries
+        '''
+        about = '''
+Commands!
+/world - for global statistics
+/top10 - for top 10 infected countries
+/about - info about the bot
 
 
-share the bot @myCovidStatbot
-developed by @AbseraTemesgen 
-
+developer: @AbseraTemesgen
         '''
         bot.sendMessage(chat_id=chat_id, text=welcome)
     elif text in [ 'world', 'World', '/world', '/World']:
@@ -44,6 +44,9 @@ developed by @AbseraTemesgen
     elif text in ['top10', 'Top10', 'top 10', 'Top 10', '/top10', '/Top10']:
         response = get_top10_stat(text)
         bot.sendMessage(chat_id=chat_id, text=response)
+    elif text in ['/about', 'about']:
+       
+        bot.sendMessage(chat_id=chat_id, text=about)
     else:
         response = 'Available messages are:\n /world\n /top10'
         bot.sendMessage(chat_id=chat_id, text=response)

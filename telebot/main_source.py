@@ -20,7 +20,7 @@ def get_world_stat(msg):
 
     worldStat = []
     worldStatDict = {}
-    worldStatFinal = 'World Status\n\n'
+    worldStatFinal = 'World Statistics\n\n'
     
     divs = soup.find_all('div', {'class' : 'maincounter-number'}) # div tag info of the <url>
     

@@ -28,6 +28,15 @@ W E L C O M E !
 /about - info about the bot
 
         '''
+        
+        bot.sendMessage(chat_id=chat_id, text=welcome)
+    elif text in [ 'world', 'World', '/world', '/World']:
+        response = get_world_stat(text)
+        bot.sendMessage(chat_id=chat_id, text=response)
+    elif text in ['top10', 'Top10', 'top 10', 'Top 10', '/top10', '/Top10']:
+        response = get_top10_stat(text)
+        bot.sendMessage(chat_id=chat_id, text=response)
+    elif text in ['/about', 'about']:
         about = '''
 Commands!
 /world - for global statistics
@@ -37,15 +46,6 @@ Commands!
 
 developer: @AbseraTemesgen
         '''
-        bot.sendMessage(chat_id=chat_id, text=welcome)
-    elif text in [ 'world', 'World', '/world', '/World']:
-        response = get_world_stat(text)
-        bot.sendMessage(chat_id=chat_id, text=response)
-    elif text in ['top10', 'Top10', 'top 10', 'Top 10', '/top10', '/Top10']:
-        response = get_top10_stat(text)
-        bot.sendMessage(chat_id=chat_id, text=response)
-    elif text in ['/about', 'about']:
-       
         bot.sendMessage(chat_id=chat_id, text=about)
     else:
         response = 'Available messages are:\n /world\n /top10'

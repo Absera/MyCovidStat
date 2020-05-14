@@ -134,7 +134,6 @@ def get_top10_stat(msg):
 
 
 
-print(get_top10_stat())
 
 
 

@@ -15,7 +15,7 @@ src = request.content
 
 soup = BeautifulSoup(src, 'lxml') 
 
-def get_world_stat():
+def get_world_stat(msg):
 
 
     worldStat = []
@@ -55,7 +55,7 @@ def get_world_stat():
 
 
 
-def get_top10_stat():
+def get_top10_stat(msg):
     countryStat = []
     countryStatFinal = '\n\n\nTop 10 Countries\n'
 
@@ -123,7 +123,7 @@ def get_top10_stat():
         for keyj in countryStatDict[keyi]:
             countryStatFinal += f'\n{wordsDict[keyj]} : {countryStatDict[keyi][keyj]}'
         countryStatFinal += '\n\n+----------------+\n'
-        
+
     date = datetime.datetime.now()
     time = date.strftime("%a %I:%M %p, %b - %Y")
     countryStatFinal += f'\nDate: {time}'
@@ -134,7 +134,7 @@ def get_top10_stat():
 
 
 
-
+print(get_top10_stat())
 
 
 

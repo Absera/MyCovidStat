@@ -48,8 +48,8 @@ def get_world_stat(msg):
     
     date = datetime.datetime.now()
     time = date.strftime("%a %I:%M %p, %b - %Y")
-    countryStatFinal += f'\nDate: {time}'
-    countryStatFinal += f'\nSource: worldometers.info'
+    worldStatFinal += f'\nDate: {time}'
+    worldStatFinal += f'\nSource: worldometers.info'
 
     return worldStatFinal
 
@@ -130,10 +130,6 @@ def get_top10_stat(msg):
     countryStatFinal += f'\nSource: worldometers.info'
 
     return countryStatFinal
-
-
-
-
 
 
 

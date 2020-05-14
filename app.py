@@ -19,15 +19,18 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode('utf-8').decode()
-    print("got text message :", text)
+    
     if text == '/start':
         welcome = '''
-W E L C O M E !
-Are you looking for Covid19 statistics?
-If your answer is yes, You are in the right place!
 
-send 'world' for global statistics
-send 'top10' for top 10 infected countries
+Welcome to this bot! 
+If you are looking for Covid19 statistics?
+
+You are in the right place!
+
+
+/world for global statistics
+/top10 for top 10 infected countries
 
 
 share the bot @myCovidStatbot
@@ -35,11 +38,14 @@ developed by @AbseraTemesgen
 
         '''
         bot.sendMessage(chat_id=chat_id, text=welcome)
-    elif text == 'world' or text == 'World' :
+    elif text in [ 'world', 'World', '/world', '/World']:
         response = get_world_stat(text)
         bot.sendMessage(chat_id=chat_id, text=response)
-    elif text == 'top10' or text == 'Top10':
+    elif text in ['top10', 'Top10', 'top 10', 'Top 10', '/top10', '/Top10']:
         response = get_top10_stat(text)
+        bot.sendMessage(chat_id=chat_id, text=response)
+    else:
+        response = 'Available messages are:\n /world\n /top10'
         bot.sendMessage(chat_id=chat_id, text=response)
 
     return 'ok'
@@ -48,13 +54,13 @@ developed by @AbseraTemesgen
 def set_webhook():
     s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=TOKEN))
     if s:
-        return "webhook setup ok"
+        return "[WEBHOOK] - RUNNING WELL!"
     else:
-        return "webhook setup failed"
+        return "[WEBHOOK] - NOT RUNNING WELL!"
 
 @app.route('/')
 def index():
-    return '.'
+    return '[APP] - RUNNING WELL!'
 
 
 if __name__ == '__main__':

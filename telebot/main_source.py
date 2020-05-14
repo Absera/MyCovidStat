@@ -2,10 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 
-######################################################
-# 					Stat Functions					 #
-######################################################
-
+##########################################################
+# 	This is the main source of the information           #
+#   functions in this file retrieves data from <srcUrl>  #
+#   and are called in the main <app.py>	        		 #
+##########################################################
 
 
 srcUrl = 'https://www.worldometers.info/coronavirus/'
@@ -14,15 +15,14 @@ src = request.content
 
 soup = BeautifulSoup(src, 'lxml') 
 
-
-def get_world_stat(msg):
+def get_world_stat():
 
 
     worldStat = []
     worldStatDict = {}
     worldStatFinal = 'World Status\n\n'
     
-    divs = soup.find_all('div', {'class' : 'maincounter-number'})
+    divs = soup.find_all('div', {'class' : 'maincounter-number'}) # div tag info of the <url>
     
     for i in range(len(divs)):
         
@@ -30,7 +30,7 @@ def get_world_stat(msg):
         
         worldStat.append(spans[0].text)
 
-    wordsDict = {
+    wordsDict = { # refers to keys in the dict <worldstatdict> vs the displayed one
         'total_case' : 'Total Cases',
         'death' : 'Total Deaths',
         'recovered' : 'Recovered',
@@ -45,120 +45,96 @@ def get_world_stat(msg):
 
     for key in worldStatDict:
         worldStatFinal += f'{wordsDict[key]} : {worldStatDict[key]}\n'
-    worldStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: worldometers.info'
+    
+    date = datetime.datetime.now()
+    time = date.strftime("%a %I:%M %p, %b - %Y")
+    countryStatFinal += f'\nDate: {time}'
+    countryStatFinal += f'\nSource: worldometers.info'
+
     return worldStatFinal
 
 
 
-def get_top10_stat(msg):
+def get_top10_stat():
     countryStat = []
     countryStatFinal = '\n\n\nTop 10 Countries\n'
 
-    id = {'id': 'main_table_countries_today'}
+    id = {'id': 'main_table_countries_today'} # id of the table in the <url>
     table = soup.find('table', id)
 
     row = table.findAll('tr')
-    row = row[9:19]
+    row = row[9:19] # slices in the table startinf from number 1 to number 10 excluding others
 
     for i in range(len(row)):
         data = row[i].findAll('td')
-        data = data[0:6]
+        data = data[0:6] # slices only the data i want, like only <total case, new case, death, new death>
 
         for j in range(len(data)):
 
             countryStat.append(data[j].text)
             for item in countryStat:
-                if item == '':
+                if item == '': # replace '' with '-' if there is no info yet
                     itemIndex = countryStat.index(item)
                     countryStat[itemIndex] = '-'
-            
-    wordsDict = {
-        'country_name' : 'Name',
+
+    statList = [ # at first all data was contained in one list # so i sliced it for each country
+    countryStat[0:5], 
+    countryStat[6:11], 
+    countryStat[12:17], 
+    countryStat[18:23], 
+    countryStat[24:29], 
+    countryStat[30:35], 
+    countryStat[36:41], 
+    countryStat[42:47], 
+    countryStat[48:53], 
+    countryStat[54:59]
+    ]
+
+    countryList = [x for x in statList] # takes the above <statList> and contain them in one list
+
+    allTop10Info = []
+
+    for item in countryList:
+        item.insert(0, countryList.index(item) +1)
+        allTop10Info.append(item)
+
+
+    wordsDict = { # used to refer in the dict <countryStatDict>
+        'country_name' : 'Country Name',
         'total_cases' : 'Total Cases',
         'new_cases' : 'New Cases',
         'total_death' : 'Total Deaths',
         'new_death' : 'New Death'
     }
 
-    countryStatDict = {
-        1 : {
-        'country_name' : countryStat[0:5][0],
-        'total_cases' : countryStat[0:5][1],
-        'new_cases' : countryStat[0:5][2],
-        'total_death' : countryStat[0:5][3],
-        'new_death' : countryStat[0:5][4]
-        },
-        
-        2 : {
-        'country_name' : countryStat[6:11][0],
-        'total_cases' : countryStat[6:11][1],
-        'new_cases' : countryStat[6:11][2],
-        'total_death' : countryStat[6:11][3],
-        'new_death' : countryStat[6:11][4]
-        },
-        3 : {
-        'country_name' : countryStat[12:17][0],
-        'total_cases' : countryStat[12:17][1],
-        'new_cases' : countryStat[12:17][2],
-        'total_death' : countryStat[12:17][3],
-        'new_death' : countryStat[12:17][4]
-        },
-        4 : {
-        'country_name' : countryStat[18:23][0],
-        'total_cases' : countryStat[18:23][1],
-        'new_cases' : countryStat[18:23][2],
-        'total_death' : countryStat[18:23][3],
-        'new_death' : countryStat[18:23][4]
-        },
-        5 : {
-        'country_name' : countryStat[24:29][0],
-        'total_cases' : countryStat[24:29][1],
-        'new_cases' : countryStat[24:29][2],
-        'total_death' : countryStat[24:29][3],
-        'new_death' : countryStat[24:29][4]
-        },
-        6 : {
-        'country_name' : countryStat[30:35][0],
-        'total_cases' : countryStat[30:35][1],
-        'new_cases' : countryStat[30:35][2],
-        'total_death' : countryStat[30:35][3],
-        'new_death' : countryStat[30:35][4]
-        },
-        7 : {
-        'country_name' : countryStat[36:41][0],
-        'total_cases' : countryStat[36:41][1],
-        'new_cases' : countryStat[36:41][2],
-        'total_death' : countryStat[36:41][3],
-        'new_death' : countryStat[36:41][4]
-        },
-        8 : {
-        'country_name' : countryStat[42:47][0],
-        'total_cases' : countryStat[42:47][1],
-        'new_cases' : countryStat[42:47][2],
-        'total_death' : countryStat[42:47][3],
-        'new_death' : countryStat[42:47][4]
-        },
-        9 : {
-        'country_name' : countryStat[48:53][0],
-        'total_cases' : countryStat[48:53][1],
-        'new_cases' : countryStat[48:53][2],
-        'total_death' : countryStat[48:53][3],
-        'new_death' : countryStat[48:53][4]
-        },
-        10 : {
-        'country_name' : countryStat[54:59][0],
-        'total_cases' : countryStat[54:59][1],
-        'new_cases' : countryStat[54:59][2],
-        'total_death' : countryStat[54:59][3],
-        'new_death' : countryStat[54:59][4]
-        },
-        }
-    
+    countryStatDict = { # adds all info in form of dictionary from the list <allTop10Info>
+    i[0]:{
+    'country_name':i[1],
+    'total_cases':i[2],
+    'new_cases':i[3],
+    'total_death':i[4],
+    'new_death':i[5]
 
-    for keyi in  countryStatDict:
+    } for i in allTop10Info # important
+    }
+
+    for keyi in  countryStatDict: # orders all the info in a easy-to-read way
         countryStatFinal += f'\n       {str(keyi)}'
         for keyj in countryStatDict[keyi]:
             countryStatFinal += f'\n{wordsDict[keyj]} : {countryStatDict[keyi][keyj]}'
-        countryStatFinal += '\n\n+----------------------+\n'
-    countryStatFinal += f'\n\nDate: {datetime.datetime.now()}\nSource: worldometers.info'
+        countryStatFinal += '\n\n+----------------+\n'
+        
+    date = datetime.datetime.now()
+    time = date.strftime("%a %I:%M %p, %b - %Y")
+    countryStatFinal += f'\nDate: {time}'
+    countryStatFinal += f'\nSource: worldometers.info'
+
     return countryStatFinal
+
+
+
+
+
+
+
+
